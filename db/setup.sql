@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS meteo_data;
+DROP DATABASE IF EXISTS meteo_data;
