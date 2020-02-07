@@ -19,6 +19,8 @@
   "homepage": "https://github.com/Natalalia/Meteo-API#readme",
   "devDependencies": {
     "chai": "^4.2.0",
+    "js-yaml": "^3.13.1",
     "mocha": "^7.0.1"
-  }
+  },
+  "dependencies": {}
 }
