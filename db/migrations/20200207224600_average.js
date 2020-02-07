@@ -1,8 +1,8 @@
 exports.up = function(knex) {
   return knex.schema.createTable("average", averageTable => {
     averageTable.string("time").primary();
-    averageTable.string("temperature");
-    averageTable.string("power");
+    averageTable.float("temperature");
+    averageTable.float("power");
   });
 };
 
