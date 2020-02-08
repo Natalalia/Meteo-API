@@ -8,7 +8,9 @@ function formatData(data) {
   });
 
   data.power.values.forEach((powerPair, i) => {
-    formatedData[i]["power"] = powerPair.value;
+    if (formatedData[i]) {
+      formatedData[i]["power"] = powerPair.value;
+    }
   });
 
   return formatedData;

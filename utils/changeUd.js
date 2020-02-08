@@ -9,4 +9,4 @@ function changeUd(data) {
   });
 }
 
-module.exports = { changeUd };
+module.exports = changeUd;
