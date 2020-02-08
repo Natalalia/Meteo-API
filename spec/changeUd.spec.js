@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const changeUd = require("../changeUd");
+const changeUd = require("../utils/changeUd");
 
 describe("changeUd", () => {
   it("returns a new empty array when an empty array is passed", () => {

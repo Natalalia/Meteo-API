@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-const formatData = require("../formatData");
+const formatData = require("../utils/formatData");
 
 describe("formatData", () => {
   it("returns an empty array when an empty object is passed", () => {

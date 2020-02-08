@@ -1,0 +1,50 @@
+{
+  "GET /api": {
+    "description": "serves up a json representation of all the available endpoints of the api"
+  },
+  "GET /api/values": {
+    "description": "serves an object with the closest previous values to the current time",
+    "queries": ["currentTime"],
+    "exampleResponse": {
+      "currentValues": {
+        "time": "00:00:00",
+        "temperature": 19.1,
+        "power": 54961
+      }
+    }
+  },
+  "GET /api/average-values": {
+    "description": "serves an array of objects with the average temperature and power per minute of the previous hour to the current time",
+    "queries": ["currentTime"],
+    "exampleResponse": {
+      "averageValues": [
+        {
+          "time": "00:01:00",
+          "temperature": 19.1,
+          "power": 54961
+        },
+        {
+          "time": "00:02:00",
+          "temperature": 19.1,
+          "power": 54961
+        },
+        {
+          "time": "00:03:00",
+          "temperature": 19.1,
+          "power": 54961
+        },
+        {
+          "time": "00:04:00",
+          "temperature": 19.1,
+          "power": 54961
+        },
+        {
+          "time": "00:05:00",
+          "temperature": 19.1,
+          "power": 54961
+        },
+        ["55 more items"]
+      ]
+    }
+  }
+}
