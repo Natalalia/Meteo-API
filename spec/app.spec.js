@@ -46,5 +46,8 @@ describe.only("/", () => {
           expect(body.currentValues.power).to.equal(54890);
         });
     });
+    // Pendiente Handling error:
+    // He descubierto que el primer minuto de cada hora solo tiene el valor del segundo 55 (excepto la hora 00),
+    // por lo que todavía no se como quiero mostrar eso al usuario en el front end.
   });
 });

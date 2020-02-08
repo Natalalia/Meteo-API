@@ -1,7 +1,9 @@
+const ENV = process.env.NODE_ENV || "development";
 const development = require("./readData");
 
 const data = {
-  development
+  development,
+  production: development
 };
 
-module.exports = data.development;
+module.exports = data[ENV];
