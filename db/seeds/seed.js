@@ -13,6 +13,5 @@ exports.seed = knex => {
         .insert(valuesToInsert)
         .returning("*");
       return values;
-    })
-    .catch(err => console.log(err, "err"));
+    });
 };
