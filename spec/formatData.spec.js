@@ -1,7 +1,7 @@
 const { expect } = require("chai");
 const formatData = require("../utils/formatData");
 
-describe("formatData", () => {
+describe.only("formatData", () => {
   it("returns an empty array when an empty object is passed", () => {
     const data = {};
     const formatedData = [];
@@ -13,7 +13,7 @@ describe("formatData", () => {
       power: { values: [{ time: "00:00:00", value: "54.961" }] }
     };
     const formatedData = [
-      { time: "00:00:00", temperature: 2921, power: "54.961" }
+      { "info-time": "00:00:00", temperature: 2921, power: "54.961" }
     ];
     expect(formatData(data)).to.eql(formatedData);
   });
@@ -33,8 +33,8 @@ describe("formatData", () => {
       }
     };
     const formatedData = [
-      { time: "00:00:00", temperature: 2921, power: "54.961" },
-      { time: "00:00:05", temperature: 2920.9, power: "54.96" }
+      { "info-time": "00:00:00", temperature: 2921, power: "54.961" },
+      { "info-time": "00:00:05", temperature: 2920.9, power: "54.96" }
     ];
     expect(formatData(data)).to.eql(formatedData);
   });
