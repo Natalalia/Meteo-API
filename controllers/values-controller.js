@@ -1,10 +1,18 @@
-const { fetchCurrentValues } = require("../models/values-models");
+const { fetchClosestValue } = require("../models/values-models");
 
-const getCurrentValues = (req, res) => {
+const getClosestValues = (req, res) => {
   const { currentTime } = req.query;
-  fetchCurrentValues(currentTime).then(currentValues => {
-    res.status(200).send({ currentValues });
+
+  return Promise.all([
+    fetchClosestValue(currentTime, "temperatures"),
+    fetchClosestValue(currentTime, "power")
+  ]).then(closestData => {
+    const closestValues = {
+      temperature: closestData[0],
+      power: closestData[1]
+    };
+    res.status(200).send({ closestValues });
   });
 };
 
-module.exports = { getCurrentValues };
+module.exports = { getClosestValues };

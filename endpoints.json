@@ -1,15 +1,20 @@
 {
   "GET /api": {
-    "description": "serves up a json representation of all the available endpoints of the api"
+    "description": "serves up a json representation of all the available endpoints of the API"
   },
   "GET /api/values": {
     "description": "serves an object with the closest previous values to the current time",
     "queries": ["currentTime"],
     "exampleResponse": {
-      "currentValues": {
-        "time": "00:00:00",
-        "temperature": 19.1,
-        "power": 54961
+      "closestValues": {
+        "temperature": {
+          "time": "00:00:00",
+          "value": 19.1
+        },
+        "power": {
+          "time": "00:00:00",
+          "power": 54961
+        }
       }
     }
   },
