@@ -1,17 +1,20 @@
 const data = require("../data/readData");
-const formatData = require("../../utils/formatData");
-const changeUd = require("../../utils/changeUd");
+const formatPower = require("../../utils/formatPower");
 
 exports.seed = knex => {
   return knex.migrate
     .rollback()
     .then(() => knex.migrate.latest())
     .then(() => {
-      const formatedData = formatData(data);
-      const valuesToInsert = changeUd(formatedData);
-      const values = knex("values")
-        .insert(valuesToInsert)
+      const formatedPower = formatPower(data.power.values);
+
+      const temperatures = knex("temperatures")
+        .insert(data.temperature.values)
         .returning("*");
-      return values;
+      const power = knex("power")
+        .insert(formatedPower)
+        .returning("*");
+
+      return Promise.all([temperatures, power]);
     });
 };
