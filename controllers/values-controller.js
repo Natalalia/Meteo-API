@@ -1,4 +1,11 @@
-const { fetchClosestValue } = require("../models/values-models");
+const {
+  fetchClosestValue,
+  fetchPreviousTemperatures
+} = require("../models/values-models");
+
+const fetchAveragePerMinute = require("../models/average-models");
+
+const findPreviousHour = require("../utils/findPreviousHour");
 
 const getClosestValues = (req, res) => {
   const { currentTime } = req.query;
@@ -15,4 +22,19 @@ const getClosestValues = (req, res) => {
   });
 };
 
-module.exports = { getClosestValues };
+const getPreviousTemperatures = (req, res) => {
+  const { currentTime } = req.query;
+  const previousHour = findPreviousHour(currentTime);
+  fetchPreviousTemperatures(previousHour, currentTime).then(
+    previousTemperatures => {
+      const averageValues = fetchAveragePerMinute(
+        previousTemperatures,
+        previousHour,
+        currentTime
+      );
+      res.status(200).send({ averageValues });
+    }
+  );
+};
+
+module.exports = { getClosestValues, getPreviousTemperatures };

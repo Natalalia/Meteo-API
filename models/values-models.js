@@ -8,9 +8,19 @@ const fetchClosestValue = (time, table) => {
     .orderBy("time", "desc")
     .limit(1)
     .then(values => {
-      //console.log(values, "values");
       return values[0];
     });
 };
 
-module.exports = { fetchClosestValue };
+const fetchPreviousTemperatures = (initialTime, finalTime) => {
+  return connection
+    .select("*")
+    .from("temperatures")
+    .whereBetween("time", [initialTime, finalTime])
+    .then(temperatures => {
+      return temperatures;
+    })
+    .catch(err => console.log(err, "err"));
+};
+
+module.exports = { fetchClosestValue, fetchPreviousTemperatures };
