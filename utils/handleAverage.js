@@ -1,3 +1,5 @@
+const createTimeReference = require("./timeReference");
+
 function createTallyPerMinute(temperatures) {
   return temperatures.reduce((tally, temperature) => {
     const hour = temperature.time.split(":")[0];
@@ -16,6 +18,22 @@ function createTallyPerMinute(temperatures) {
   }, {});
 }
 
+function completeTally(tally, initialTime, finalTime, amount) {
+  const newTally = { ...tally };
+
+  if (Object.keys(newTally).length < amount) {
+    const timeReference = createTimeReference(initialTime, finalTime);
+
+    for (let i = 0; i < timeReference.length; i++) {
+      if (!Object.keys(newTally).includes(timeReference[i])) {
+        newTally[timeReference[i]] = { count: 0, total: 0 };
+      }
+    }
+  }
+
+  return newTally;
+}
+
 function calculateAverage(tally) {
   const averageValues = [];
   for (const key in tally) {
@@ -26,4 +44,9 @@ function calculateAverage(tally) {
   }
   return averageValues;
 }
-module.exports = { createTallyPerMinute, calculateAverage };
+
+module.exports = {
+  createTallyPerMinute,
+  completeTally,
+  calculateAverage
+};

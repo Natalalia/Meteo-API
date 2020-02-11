@@ -1,7 +1,9 @@
 const {
   createTallyPerMinute,
+  completeTally,
   calculateAverage
 } = require("../utils/handleAverage");
+
 const { expect } = require("chai");
 
 describe("createTallyPerMinute", () => {
@@ -37,6 +39,136 @@ describe("createTallyPerMinute", () => {
       "09:45:00": { count: 2, total: 30 }
     };
     expect(createTallyPerMinute(temperatures)).to.eql(tally);
+  });
+});
+
+describe("completeTally", () => {
+  it("returns the tally object passed in if it has the given amount of keys", () => {
+    const tally = {
+      "09:00:00": { count: 1, total: 10 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    const initial = "09:00:00";
+    const final = "09:04:00";
+    const amount = 5;
+    const output = {
+      "09:00:00": { count: 1, total: 10 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+  });
+  it("returns a completed new tally object if the one passed in does not have the initial value", () => {
+    const tally = {
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    const initial = "09:00:00";
+    const final = "09:04:00";
+    const amount = 5;
+    const output = {
+      "09:00:00": { count: 0, total: 0 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+    completeTally(tally, initial, final, amount);
+    expect(tally).to.not.eql(output);
+  });
+  it("returns a completed new tally object if the one passed in does not have the final value", () => {
+    const tally = {
+      "09:00:00": { count: 3, total: 50 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 }
+    };
+    const initial = "09:00:00";
+    const final = "09:04:00";
+    const amount = 5;
+    const output = {
+      "09:00:00": { count: 3, total: 50 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 2, total: 30 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 0, total: 0 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+    completeTally(tally, initial, final, amount);
+    expect(tally).to.not.eql(output);
+  });
+  it("returns a completed new tally object if the one passed in does not have info each minute, and times are within the same hour", () => {
+    const tally = {
+      "09:00:00": { count: 3, total: 50 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    const initial = "09:00:00";
+    const final = "09:04:00";
+    const amount = 5;
+    const output = {
+      "09:00:00": { count: 3, total: 50 },
+      "09:01:00": { count: 3, total: 50 },
+      "09:02:00": { count: 0, total: 0 },
+      "09:03:00": { count: 2, total: 30 },
+      "09:04:00": { count: 2, total: 30 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+    completeTally(tally, initial, final, amount);
+    expect(tally).to.not.eql(output);
+  });
+  it("returns a completed new tally object if the one passed does not have info each minute and belong to different hours", () => {
+    const tally = {
+      "09:57:00": { count: 3, total: 50 },
+      "09:59:00": { count: 2, total: 30 },
+      "10:00:00": { count: 2, total: 30 },
+      "10:02:00": { count: 2, total: 30 }
+    };
+    const initial = "09:57:00";
+    const final = "10:02:00";
+    const amount = 6;
+    const output = {
+      "09:57:00": { count: 3, total: 50 },
+      "09:58:00": { count: 0, total: 0 },
+      "09:59:00": { count: 2, total: 30 },
+      "10:00:00": { count: 2, total: 30 },
+      "10:01:00": { count: 0, total: 0 },
+      "10:02:00": { count: 2, total: 30 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+    completeTally(tally, initial, final, amount);
+    expect(tally).to.not.eql(output);
+  });
+  it("returns a completed new tally object if the one passed  does not have info each minute and its from different days", () => {
+    const tally = {
+      "23:58:00": { count: 3, total: 50 },
+      "23:59:00": { count: 2, total: 30 },
+      "00:01:00": { count: 2, total: 30 },
+      "00:02:00": { count: 2, total: 30 }
+    };
+    const initial = "23:57:00";
+    const final = "00:02:00";
+    const amount = 6;
+    const output = {
+      "23:57:00": { count: 0, total: 0 },
+      "23:58:00": { count: 3, total: 50 },
+      "23:59:00": { count: 2, total: 30 },
+      "00:00:00": { count: 0, total: 0 },
+      "00:01:00": { count: 2, total: 30 },
+      "00:02:00": { count: 2, total: 30 }
+    };
+    expect(completeTally(tally, initial, final, amount)).to.eql(output);
+    completeTally(tally, initial, final, amount);
+    expect(tally).to.not.eql(output);
   });
 });
 
