@@ -6,8 +6,8 @@ const {
 
 const orderAveragePerMinutes = require("../utils/orderResponse");
 
-const fetchAveragePerMinute = (temperatures, initialTime, finalTime) => {
-  const tally = createTallyPerMinute(temperatures);
+const fetchAveragePerMinute = (values, initialTime, finalTime) => {
+  const tally = createTallyPerMinute(values);
   const completedTally = completeTally(tally, initialTime, finalTime, 60);
   const averageInfo = calculateAverage(completedTally);
   return orderAveragePerMinutes(averageInfo);

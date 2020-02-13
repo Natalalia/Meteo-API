@@ -2,13 +2,13 @@ const apiRouter = require("express").Router();
 const getEndPoints = require("../controllers/api-controller");
 const {
   getClosestValues,
-  getPreviousTemperatures
+  getPreviousValues
 } = require("../controllers/values-controller");
 
 apiRouter.route("/").get(getEndPoints);
 
 apiRouter.route("/values").get(getClosestValues);
 
-apiRouter.route("/temperatures").get(getPreviousTemperatures);
+apiRouter.route("/:requiredInfo").get(getPreviousValues);
 
 module.exports = apiRouter;

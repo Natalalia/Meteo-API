@@ -12,15 +12,15 @@ const fetchClosestValue = (time, table) => {
     });
 };
 
-const fetchPreviousTemperatures = (initialTime, finalTime) => {
+const fetchPreviousValues = (initialTime, finalTime, table) => {
   return connection
     .select("*")
-    .from("temperatures")
+    .from(table)
     .whereBetween("time", [initialTime, finalTime])
-    .then(temperatures => {
-      return temperatures;
+    .then(previousValues => {
+      return previousValues;
     })
     .catch(err => console.log(err, "err"));
 };
 
-module.exports = { fetchClosestValue, fetchPreviousTemperatures };
+module.exports = { fetchClosestValue, fetchPreviousValues };

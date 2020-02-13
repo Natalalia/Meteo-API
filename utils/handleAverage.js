@@ -1,17 +1,17 @@
 const createTimeReference = require("./timeReference");
 
-function createTallyPerMinute(temperatures) {
-  return temperatures.reduce((tally, temperature) => {
-    const hour = temperature.time.split(":")[0];
-    const minute = temperature.time.split(":")[1];
+function createTallyPerMinute(values) {
+  return values.reduce((tally, currentValue) => {
+    const hour = currentValue.time.split(":")[0];
+    const minute = currentValue.time.split(":")[1];
     const key = [hour, minute, "00"].join(":");
     if (Object.keys(tally).includes(key)) {
       tally[key].count += 1;
-      tally[key].total += temperature.value;
+      tally[key].total += currentValue.value;
     } else {
       tally[key] = {
         count: 1,
-        total: temperature.value
+        total: currentValue.value
       };
     }
     return tally;

@@ -62,7 +62,20 @@ describe("/", () => {
             );
           });
       });
-      //it --> cuando paso las 00:03:02 testear, hacer dos queries between por separado y juntar los arrays que me den en el orden que quiero
+    });
+    describe("/power", () => {
+      it("GET status: 200 - serves an array of objects with the average of power per minute during the previous hour to the time passed as query", () => {
+        return request(app)
+          .get("/api/power?currentTime=10:03:02")
+          .expect(200)
+          .then(({ body: { averageValues } }) => {
+            expect(averageValues).to.be.an("array");
+            expect(averageValues[0].time).to.equal("09:03:00");
+            expect(averageValues[averageValues.length - 1].time).to.equal(
+              "10:03:00"
+            );
+          });
+      });
     });
   });
 });
