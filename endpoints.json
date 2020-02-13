@@ -9,44 +9,40 @@
       "closestValues": {
         "temperature": {
           "time": "00:00:00",
-          "value": 19.1
+          "value": 2920.5
         },
         "power": {
           "time": "00:00:00",
-          "power": 54961
+          "power": 54.961
         }
       }
     }
   },
-  "GET /api/average-values": {
-    "description": "serves an array of objects with the average temperature and power per minute of the previous hour to the current time",
+  "GET /api/:requiredInfo": {
+    "description": "serves an array of objects with the time and average value per minute of the previous hour to the current time",
+    "param": ["temperatures", "power"],
     "queries": ["currentTime"],
     "exampleResponse": {
       "averageValues": [
         {
           "time": "00:01:00",
-          "temperature": 19.1,
-          "power": 54961
+          "average": "2920.5"
         },
         {
           "time": "00:02:00",
-          "temperature": 19.1,
-          "power": 54961
+          "average": "2920.5"
         },
         {
           "time": "00:03:00",
-          "temperature": 19.1,
-          "power": 54961
+          "average": "2920.5"
         },
         {
           "time": "00:04:00",
-          "temperature": 19.1,
-          "power": 54961
+          "average": "2920.5"
         },
         {
           "time": "00:05:00",
-          "temperature": 19.1,
-          "power": 54961
+          "average": "2920.5"
         },
         ["55 more items"]
       ]
