@@ -6,8 +6,7 @@ exports.seed = knex => {
     .rollback()
     .then(() => knex.migrate.latest())
     .then(() => {
-      const formatedPower = formatPower(data.power.values);
-
+      const formatedPower = formatPower(data.power.values); // Some of the power values have mixed syntax between . and , this function keep them consistence
       const temperatures = knex("temperatures")
         .insert(data.temperature.values)
         .returning("*");

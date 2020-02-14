@@ -1,5 +1,7 @@
-// Some of the power values have mixed syntax between . and , this function keep them consistence
-
+/**
+ * This function swaps the incorrect character into the expected one
+ * @param {array} data - objects with time-value pairs
+ */
 function formatPower(data) {
   return data.map(({ ...info }) => {
     const newValue = info.value.replace(",", ".");
