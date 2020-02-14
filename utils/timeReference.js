@@ -1,3 +1,8 @@
+/**
+ * This function creates a reference array with all the times from the initial to the final one
+ * @param {string} initialTime - Initial time of the period
+ * @param {string} finalTime - Final time of the period
+ */
 function createTimeReference(initialTime, finalTime) {
   const initialMin = parseInt(initialTime.split(":")[1]);
   const initialHour = initialTime.split(":")[0];

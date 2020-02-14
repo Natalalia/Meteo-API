@@ -1,3 +1,7 @@
+/** Returns the previous hour to the given one
+ *
+ * @param {string} time - The time reference to get the previous hour
+ */
 function findPreviousHour(time) {
   if (time.length === 0) return "";
 

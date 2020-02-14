@@ -1,3 +1,7 @@
+/**
+ * This function ensures the objects are in the same order with the time
+ * @param {array} averageInfo - Array of objects time-average key value pair
+ */
 function orderAveragePerMinutes(averageInfo) {
   averageInfo.sort(function(firstItem, secondItem) {
     if (firstItem.time > secondItem.time) {

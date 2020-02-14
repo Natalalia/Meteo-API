@@ -25,7 +25,7 @@ const getClosestValues = (req, res) => {
 const getPreviousValues = (req, res) => {
   const { currentTime } = req.query;
   const { requiredInfo } = req.params;
-  const previousHour = findPreviousHour(currentTime);
+  const previousHour = findPreviousHour(currentTime); // because I want to show the values from the previous hour I get the reference with this function
   fetchPreviousValues(previousHour, currentTime, requiredInfo).then(
     previousValues => {
       const averageValues = fetchAveragePerMinute(
