@@ -57,6 +57,11 @@ function calculateAverage(tally) {
     item["average"] = (tally[key].total / tally[key].count).toFixed(2);
     averageValues.push(item);
   }
+  averageValues.forEach(value => {
+    if (value.average === "NaN") {
+      value.average = null;
+    }
+  });
   return averageValues;
 }
 

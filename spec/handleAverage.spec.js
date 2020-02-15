@@ -189,15 +189,28 @@ describe("calculateAverage", () => {
     expect(calculateAverage(input)).to.eql(output);
   });
   it("returns an array of objects with the different times an average of the object is passed", () => {
-    const input = {
+    let input = {
       "09:30:00": { count: 1, total: 10 },
       "10:00:00": { count: 3, total: 50 },
       "10:25:00": { count: 2, total: 30 }
     };
-    const output = [
+    let output = [
       { time: "09:30:00", average: "10.00" },
       { time: "10:00:00", average: "16.67" },
       { time: "10:25:00", average: "15.00" }
+    ];
+    expect(calculateAverage(input)).to.eql(output);
+    input = {
+      "09:30:00": { count: 1, total: 10 },
+      "10:00:00": { count: 3, total: 50 },
+      "10:25:00": { count: 0, total: 0 },
+      "10:30:00": { count: 2, total: 30 }
+    };
+    output = [
+      { time: "09:30:00", average: "10.00" },
+      { time: "10:00:00", average: "16.67" },
+      { time: "10:25:00", average: null },
+      { time: "10:30:00", average: "15.00" }
     ];
     expect(calculateAverage(input)).to.eql(output);
   });
