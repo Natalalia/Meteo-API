@@ -2,7 +2,7 @@
 
 API to use along with the front end side [meteo](https://github.com/Natalalia/meteo).
 
-The information that its served in the different end points can be found in the following hosted link [https://meteo-api.herokuapp.com/api](https://meteo-api.herokuapp.com/api) as well as in the `endpoints.json` file.
+The information that it is served in the different endpoints can be found in the following hosted link [https://meteo-api.herokuapp.com/api](https://meteo-api.herokuapp.com/api) as well as in the `endpoints.json` file.
 
 ## Getting Started
 
@@ -58,7 +58,7 @@ Before you can test the project, you will need to create and seed the database:
 npm run seed-dev
 ```
 
-To check the functionality, you can start the server listenning on _Port 9090_ by running:
+To check the functionality, you can start the server listening on _Port 9090_ by running:
 
 ```bash
 npm start
@@ -66,7 +66,7 @@ npm start
 
 ## Running the tests
 
-I made some tests for the end points as well as for extra functionality I needed. To run the tests:
+I made some tests for the endpoints as well as for the extra functionality I needed. To run the tests:
 
 ```bash
 npm test
@@ -82,7 +82,7 @@ npm test
 
 ### Other Available Scripts
 
-Create development database locally:
+Create a development database locally:
 
 ```bash
 npm run setup-dbs
