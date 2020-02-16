@@ -19,8 +19,7 @@ const fetchPreviousValues = (initialTime, finalTime, table) => {
     .whereBetween("time", [initialTime, finalTime])
     .then(previousValues => {
       return previousValues;
-    })
-    .catch(err => console.log(err, "err"));
+    });
 };
 
 module.exports = { fetchClosestValue, fetchPreviousValues };
