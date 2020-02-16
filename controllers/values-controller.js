@@ -7,6 +7,12 @@ const fetchAveragePerMinute = require("../models/average-models");
 
 const findPreviousHour = require("../utils/findPreviousHour");
 
+/**
+ * This function is the controller which aim is to send the previous temperature and power to the given time
+ * @param {object} req - express request object
+ * @param {object} res - express response object
+ * @param {function} next - express next function
+ */
 const getClosestValues = (req, res, next) => {
   const { currentTime } = req.query;
 
@@ -31,14 +37,32 @@ const getClosestValues = (req, res, next) => {
     .catch(next);
 };
 
+/**
+ * This function invokes the correspondent controller with the required information (temperatures) we are interested in
+ * @param {object} req - express request object
+ * @param {object} res - express response object
+ * @param {function} next - express next function
+ */
 const getPreviousTemperatures = (req, res, next) => {
   getPreviousValues(req, res, next, "temperatures");
 };
 
+/**
+ * This function invokes the correspondent controller with the required information (power) we are interested in
+ * @param {object} req - express request object
+ * @param {object} res - express response object
+ * @param {function} next - express next function
+ */
 const getPreviousPower = (req, res, next) => {
   getPreviousValues(req, res, next, "power");
 };
 
+/**
+ * This function is the controller which aim is to send the temperatures and power from one hour earlier to the given time
+ * @param {object} req - express request object
+ * @param {object} res - express response object
+ * @param {function} next - express next function
+ */
 const getPreviousValues = (req, res, next, requiredInfo) => {
   const { currentTime } = req.query;
 
